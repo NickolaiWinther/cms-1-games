@@ -1,0 +1,228 @@
+body {
+    background: #eee;
+    margin: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Raleway", sans-serif;
+}
+p,
+a,
+li {
+    font-family: "Raleway", sans-serif;
+}
+
+::-webkit-scrollbar {
+    width: 15px;
+}
+::-webkit-scrollbar-track {
+    background: rgba(46, 204, 113, 0.2);
+}
+::-webkit-scrollbar-thumb {
+    background: #2ecc71;
+    border-radius: 7.5px;
+}
+
+body > .wrapper {
+    width: 70%;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+
+    aside,
+    main {
+        box-shadow: 0px 0px 7px #555;
+        margin-top: 10px;
+        box-sizing: border-box;
+    }
+}
+
+aside {
+    width: 19%;
+    background: white;
+    position: sticky;
+    top: 10px;
+
+    .logo {
+        width: 80%;
+        display: block;
+        margin: auto;
+    }
+    .header {
+        text-align: center;
+    }
+    nav {
+        ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+
+            a {
+                width: 100%;
+                display: block;
+                padding: 20px;
+                box-sizing: border-box;
+                color: black;
+                text-decoration: none;
+                position: relative;
+
+                &.active,
+                &:hover {
+                    background-image: linear-gradient(to right, rgba(46, 204, 113, 0.5), white);
+                }
+                &::after,
+                &.active::after {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    bottom: 0;
+                    width: 0px;
+                    background: #2ecc71;
+                    transition: 0.3s;
+                }
+                &:hover::after,
+                &.active::after {
+                    width: 4px;
+                }
+            }
+        }
+    }
+}
+
+main {
+    width: 79%;
+    background: white;
+    overflow: hidden;
+
+    .banner {
+        width: 100%;
+        box-shadow: 0px 0px 10px #333;
+    }
+
+    .content {
+        padding: 10px;
+
+        .header {
+            position: relative;
+            width: fit-content;
+            z-index: 2;
+            &::after {
+                z-index: 1;
+                position: absolute;
+                content: "";
+                left: 0;
+                bottom: -3px;
+                right: 0;
+                height: 3px;
+                background-image: linear-gradient(to right, #2ecc71, white);
+            }
+        }
+
+        .games-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            align-items: flex-start;
+
+            .game {
+                width: 31%;
+                border: 2px solid #bbb;
+                box-shadow: 0px 0px 10px #bbb;
+                padding: 5px;
+                box-sizing: border-box;
+
+                .game-title {
+                    text-align: center;
+                }
+                .game-image {
+                    width: 100%;
+                }
+                .publisher {
+                    display: flex;
+                    font-size: 14px;
+                    justify-content: space-between;
+                }
+                .game-description {
+                    font-size: 15px;
+                }
+                .price {
+                    text-decoration: none;
+                    display: block;
+                    text-align: center;
+                    padding: 10px 30px;
+                    background: #2ecc71;
+                    color: white;
+                    box-shadow: 0 0 5px #bbb;
+
+                    &::after {
+                        content: " kr.";
+                    }
+                }
+                .categories {
+                    padding: 0;
+                    list-style: none;
+
+                    .category {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+}
+footer {
+    width: 69.5%;
+    background: white;
+    margin: auto;
+    padding-top: 20px;
+    box-shadow: 0px 0px 7px #555;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+
+    footer > div {
+        width: 30%;
+    }
+    .links {
+        width: 30%;
+        a {
+            display: block;
+            color: black;
+            text-decoration: none;
+        }
+    }
+    .social {
+        width: 30%;
+        .social-icons {
+            display: flex;
+            i {
+                padding: 10px;
+                font-size: 2rem;
+                color: #2ecc71;
+            }
+        }
+    }
+    .newsletter {
+        width: 30%;
+        input {
+            box-sizing: border-box;
+            width: 90%;
+            padding: 7px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #2ecc71;
+            outline: none;
+        }
+        input[type="submit"] {
+            background: #2ecc71;
+            border: none;
+        }
+    }
+}
