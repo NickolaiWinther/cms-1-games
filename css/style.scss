@@ -23,7 +23,8 @@ li {
     background: rgba(46, 204, 113, 0.2);
 }
 ::-webkit-scrollbar-thumb {
-    background: #2ecc71;
+    background: lighten(#2ecc71, 10%);
+    border: 3px solid #2ecc71;
     border-radius: 7.5px;
 }
 
@@ -62,10 +63,26 @@ aside {
             margin: 0;
             list-style: none;
 
+            li:last-child {
+                position: relative;
+
+                a::after {
+                    position: absolute;
+                    font-family: "FontAwesome";
+                    content: "\f054";
+                    color: #2ecc71;
+                    right: 18px;
+                    transition: transform 0.2s;
+                }
+                a.rotate::after {
+                    transform: rotate(90deg);
+                }
+            }
+
             a {
                 width: 100%;
                 display: block;
-                padding: 20px;
+                padding: 18px;
                 box-sizing: border-box;
                 color: black;
                 text-decoration: none;
@@ -75,8 +92,8 @@ aside {
                 &:hover {
                     background-image: linear-gradient(to right, rgba(46, 204, 113, 0.5), white);
                 }
-                &::after,
-                &.active::after {
+                &::before,
+                &.active::before {
                     content: "";
                     position: absolute;
                     left: 0;
@@ -84,13 +101,35 @@ aside {
                     bottom: 0;
                     width: 0px;
                     background: #2ecc71;
-                    transition: 0.3s;
+                    transition: 0.2s;
                 }
-                &:hover::after,
-                &.active::after {
+                &:hover::before,
+                &.active::before {
                     width: 4px;
                 }
             }
+        }
+    }
+    form.login {
+        transition: 0.3s;
+        &.hide {
+            transition: 0.3s;
+            pointer-events: none;
+            opacity: 0;
+            height: 0;
+        }
+        input {
+            width: 90%;
+            margin: 5px 5%;
+            box-sizing: border-box;
+            padding: 7px;
+            border-radius: 5px;
+            border: 1px solid #2ecc71;
+            outline: none;
+        }
+        input[type="submit"] {
+            background: #2ecc71;
+            border: none;
         }
     }
 }
@@ -137,6 +176,7 @@ main {
                 box-shadow: 0px 0px 10px #bbb;
                 padding: 5px;
                 box-sizing: border-box;
+                margin-top: 10px;
 
                 .game-title {
                     text-align: center;

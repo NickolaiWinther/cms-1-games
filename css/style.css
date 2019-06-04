@@ -27,7 +27,8 @@ li {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2ecc71;
+  background: #54d98c;
+  border: 3px solid #2ecc71;
   border-radius: 7.5px;
 }
 
@@ -77,10 +78,31 @@ aside nav ul {
   list-style: none;
 }
 
+aside nav ul li:last-child {
+  position: relative;
+}
+
+aside nav ul li:last-child a::after {
+  position: absolute;
+  font-family: "FontAwesome";
+  content: "\f054";
+  color: #2ecc71;
+  right: 18px;
+  -webkit-transition: -webkit-transform 0.2s;
+  transition: -webkit-transform 0.2s;
+  transition: transform 0.2s;
+  transition: transform 0.2s, -webkit-transform 0.2s;
+}
+
+aside nav ul li:last-child a.rotate::after {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
 aside nav ul a {
   width: 100%;
   display: block;
-  padding: 20px;
+  padding: 18px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   color: black;
@@ -93,7 +115,7 @@ aside nav ul a.active, aside nav ul a:hover {
   background-image: linear-gradient(to right, rgba(46, 204, 113, 0.5), white);
 }
 
-aside nav ul a::after, aside nav ul a.active::after {
+aside nav ul a::before, aside nav ul a.active::before {
   content: "";
   position: absolute;
   left: 0;
@@ -101,12 +123,41 @@ aside nav ul a::after, aside nav ul a.active::after {
   bottom: 0;
   width: 0px;
   background: #2ecc71;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+aside nav ul a:hover::before, aside nav ul a.active::before {
+  width: 4px;
+}
+
+aside form.login {
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
 
-aside nav ul a:hover::after, aside nav ul a.active::after {
-  width: 4px;
+aside form.login.hide {
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  pointer-events: none;
+  opacity: 0;
+  height: 0;
+}
+
+aside form.login input {
+  width: 90%;
+  margin: 5px 5%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 7px;
+  border-radius: 5px;
+  border: 1px solid #2ecc71;
+  outline: none;
+}
+
+aside form.login input[type="submit"] {
+  background: #2ecc71;
+  border: none;
 }
 
 main {
@@ -167,6 +218,7 @@ main .content .games-wrapper .game {
   padding: 5px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  margin-top: 10px;
 }
 
 main .content .games-wrapper .game .game-title {
