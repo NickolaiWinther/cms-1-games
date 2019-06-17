@@ -1,6 +1,7 @@
 body {
     background: #eee;
     margin: 0;
+    overflow-x: hidden;
 }
 h1,
 h2,
@@ -12,15 +13,22 @@ h6 {
 }
 p,
 a,
-li {
+li,
+label,
+input,
+textarea {
     font-family: "Raleway", sans-serif;
+}
+
+body .hide-aside {
+    display: none;
 }
 
 ::-webkit-scrollbar {
     width: 15px;
 }
 ::-webkit-scrollbar-track {
-    background: rgba(46, 204, 113, 0.2);
+    background: lighten(#2ecc71, 40%);
 }
 ::-webkit-scrollbar-thumb {
     background: lighten(#2ecc71, 10%);
@@ -63,10 +71,10 @@ aside {
             margin: 0;
             list-style: none;
 
-            li:last-child {
+            li a.loginBtn {
                 position: relative;
 
-                a::after {
+                &::after {
                     position: absolute;
                     font-family: "FontAwesome";
                     content: "\f054";
@@ -74,7 +82,7 @@ aside {
                     right: 18px;
                     transition: transform 0.2s;
                 }
-                a.rotate::after {
+                &.rotate::after {
                     transform: rotate(90deg);
                 }
             }
@@ -111,9 +119,17 @@ aside {
         }
     }
     form.login {
-        transition: 0.3s;
+        transition: height 0.2s 0.1s, opacity 0.1s 0.2s;
+        height: fit-content;
+        .error {
+            color: red;
+            text-align: center;
+            font-size: 14px;
+            margin: 0;
+            padding: 10px 0;
+        }
         &.hide {
-            transition: 0.3s;
+            transition: height 0.2s 0s, opacity 0.1s 0s;
             pointer-events: none;
             opacity: 0;
             height: 0;
@@ -138,6 +154,7 @@ main {
     width: 79%;
     background: white;
     overflow: hidden;
+    transition: 0.3s;
 
     .banner {
         width: 100%;
@@ -146,6 +163,15 @@ main {
 
     .content {
         padding: 10px;
+
+        .welcome {
+            margin: 0;
+            margin-top: -50px;
+            color: #2ecc71;
+            font-size: 2rem;
+            overflow: hidden;
+            width: 800px;
+        }
 
         .header {
             position: relative;
@@ -163,6 +189,40 @@ main {
             }
         }
 
+        .create-form {
+            display: flex;
+            flex-wrap: wrap;
+            width: 50%;
+
+            label {
+                width: 100%;
+            }
+            input,
+            textarea,
+            select {
+                width: 100%;
+                padding: 10px;
+                resize: vertical;
+                margin-bottom: 20px;
+                box-sizing: border-box;
+            }
+            input[type="submit"] {
+                background: #2ecc71;
+                color: white;
+                border: none;
+                transition: 0.3s;
+                cursor: pointer;
+                font-size: 1rem;
+
+                &:hover {
+                    box-shadow: 0 0 10px #55555555;
+                }
+            }
+            textarea {
+                min-height: 30px;
+            }
+        }
+
         .games-wrapper {
             width: 100%;
             display: flex;
@@ -177,9 +237,33 @@ main {
                 padding: 5px;
                 box-sizing: border-box;
                 margin-top: 10px;
+                position: relative;
 
                 .game-title {
                     text-align: center;
+
+                    .delete-article {
+                        color: #cc2e71;
+                        padding-right: auto;
+                        position: absolute;
+                        right: 10px;
+                        font-size: 1.2rem;
+                        text-decoration: none;
+                    }
+
+                    .delete-article:hover {
+                        transition: 0.3s;
+                        &::before {
+                            transition: 0.3s;
+                            z-index: 5;
+                            margin-right: 10px;
+                            content: "Slet spil";
+                            background: #333;
+                            color: #eee;
+                            padding: 5px;
+                            border-radius: 5px;
+                        }
+                    }
                 }
                 .game-image {
                     width: 100%;
@@ -200,10 +284,6 @@ main {
                     background: #2ecc71;
                     color: white;
                     box-shadow: 0 0 5px #bbb;
-
-                    &::after {
-                        content: " kr.";
-                    }
                 }
                 .categories {
                     padding: 0;
@@ -214,6 +294,20 @@ main {
                     }
                 }
             }
+        }
+        .error {
+            color: red;
+            text-align: center;
+            font-size: 14px;
+            margin: 0;
+            padding: 10px 0;
+        }
+        .success {
+            color: #2ecc71;
+            text-align: center;
+            font-size: 14px;
+            margin: 0;
+            padding: 10px 0;
         }
     }
 }
@@ -226,12 +320,12 @@ footer {
     margin-top: 10px;
     display: flex;
     justify-content: space-around;
+    transition: 0.3s;
 
     footer > div {
         width: 30%;
     }
     .links {
-        width: 30%;
         a {
             display: block;
             color: black;
@@ -239,7 +333,6 @@ footer {
         }
     }
     .social {
-        width: 30%;
         .social-icons {
             display: flex;
             i {
@@ -250,7 +343,6 @@ footer {
         }
     }
     .newsletter {
-        width: 30%;
         input {
             box-sizing: border-box;
             width: 90%;
@@ -262,7 +354,119 @@ footer {
         }
         input[type="submit"] {
             background: #2ecc71;
-            border: none;
+            color: white;
+            transition: 0.3s;
+
+            &:hover {
+                background: white;
+                color: #2ecc71;
+                border: 1px solid #2ecc71;
+            }
         }
+    }
+}
+
+@media screen and(max-width: 1400px) {
+    body .wrapper {
+        width: 80%;
+    }
+    body footer {
+        width: 79%;
+    }
+}
+
+@media screen and(max-width: 1200px) {
+    body .wrapper {
+        width: 100%;
+    }
+    main .content .games-wrapper .game {
+        width: 48%;
+    }
+    body footer {
+        width: 100%;
+    }
+}
+
+@media screen and(max-width: 800px) {
+    body {
+        background: black;
+
+        .wrapper aside.slide {
+            left: 0;
+        }
+        main.slide,
+        footer.slide {
+            opacity: 0.4;
+        }
+
+        .hide-aside {
+            display: block;
+            font-size: 30px;
+            color: #2ecc71;
+            position: fixed;
+            top: 25px;
+            left: 25px;
+            z-index: 10;
+        }
+
+        .wrapper aside {
+            position: fixed;
+            top: 0;
+            left: -30vw;
+            width: 30vw;
+            transition: 0.3s;
+            bottom: 0;
+            z-index: 3;
+            box-shadow: none;
+        }
+
+        .wrapper {
+            width: 100%;
+
+            aside,
+            main {
+                margin-top: 0;
+            }
+        }
+        main {
+            width: 100vw;
+        }
+        .wrapper .create-form {
+            width: 100%;
+        }
+    }
+}
+
+@media screen and(max-width: 650px) {
+    body footer {
+        padding: 5%;
+        flex-direction: column;
+        box-sizing: border-box;
+        > div {
+            width: 100%;
+        }
+        .newsletter input {
+            width: 100%;
+        }
+    }
+}
+
+@media screen and(max-width: 500px) {
+    main .content .games-wrapper .game {
+        width: 98%;
+    }
+    body .wrapper aside {
+        width: 50vw;
+        left: -50vw;
+    }
+}
+
+@media screen and(max-width: 350px) {
+    body .wrapper aside .logo {
+        width: 50%;
+    }
+    body .wrapper aside {
+        width: 100vw;
+        left: -100vw;
     }
 }
