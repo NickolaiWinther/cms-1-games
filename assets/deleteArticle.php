@@ -3,7 +3,6 @@
 
     $gameId = $_GET["id"];
 
-    echo $gameId;
 
     $statement = $dbh->prepare("DELETE FROM games WHERE gameId = $gameId");
     $statement->execute();
